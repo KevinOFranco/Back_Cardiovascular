@@ -11,8 +11,8 @@ public class PacienteServicio {
 
     private final IPacienteRepositorio patientRepository;
 
-    public Paciente getPatient(Long id){
-        return patientRepository.getReferenceById(id);
+    public Paciente getPatient(String id){
+        return patientRepository.findByIdentificacion(id);
     }
 
     public Paciente savePatient(Paciente paciente){

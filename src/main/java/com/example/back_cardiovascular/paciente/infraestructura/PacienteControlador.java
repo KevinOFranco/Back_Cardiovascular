@@ -16,24 +16,26 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(path="/patients") // This means URL's start with /demo (after Application path)
+@RequestMapping(path="/pacientes") // This means URL's start with /demo (after Application path)
 public class PacienteControlador {
 
     @Autowired
     private PacienteServicio service;
     @SneakyThrows
     @PostMapping(path="/get")
-    public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestBody PacienteRequest pacienteRequest) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return ResponseEntity.ok(service.getPatient(pacienteRequest.getId()));
+    public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
+        return ResponseEntity.ok(service.getPatient(identificacion));
+    }
+
+    @SneakyThrows
+    @PostMapping(path="/save")
+    public @ResponseBody ResponseEntity<Paciente> savePatient (@RequestBody Paciente paciente) {
+        return ResponseEntity.ok(service.savePatient(paciente));
     }
 
     @SneakyThrows
     @PutMapping(path="/update")
     public @ResponseBody ResponseEntity<Paciente> updatePatient (@RequestBody Paciente pacienteRequest) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return ResponseEntity.ok(service.getPatient(pacienteRequest.getId()));
+        return ResponseEntity.ok(service.getPatient(pacienteRequest.getIdentificacion()));
     }
 }

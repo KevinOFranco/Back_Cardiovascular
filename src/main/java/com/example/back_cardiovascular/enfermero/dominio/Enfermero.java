@@ -20,8 +20,8 @@ public class Enfermero {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "nurse")
+    @OneToMany(mappedBy = "enfermero")
     private List<Cita> citas;
-    @OneToMany(mappedBy = "nurse")
+    @OneToMany(mappedBy = "enfermero")
     private List<HistoriaClinica> medicalHistories;
 }
