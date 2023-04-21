@@ -22,9 +22,11 @@ public class PacienteControlador {
     @Autowired
     private PacienteServicio service;
     @SneakyThrows
-    @PostMapping(path="/get")
+    @GetMapping(path="/get")
     public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
-        return ResponseEntity.ok(service.getPatient(identificacion));
+        Paciente paciente = service.getPatient(identificacion);
+        System.out.println(paciente);
+        return ResponseEntity.ok(paciente);
     }
 
     @SneakyThrows
