@@ -15,11 +15,11 @@ public class EnfermeroServicio {
 
     private final IEnfermeroRepositorio enfermeroRepositorio;
 
-    public boolean save(EnfermeroRequest enfermeroRequest){
-        return enfermeroRepositorio.save(enfermeroRequest.transform()) != null;
+    public boolean save(Enfermero enfermero){
+        return enfermeroRepositorio.save(enfermero) != null;
     }
-    public Optional<Enfermero> get(Long id){
-        return enfermeroRepositorio.findById(id);
+    public Enfermero get(String id){
+        return enfermeroRepositorio.findByIdentificacion(id);
     }
     public Object get(LoginRequest loginRequest){
         return enfermeroRepositorio.findByEmail(loginRequest.getEmail());

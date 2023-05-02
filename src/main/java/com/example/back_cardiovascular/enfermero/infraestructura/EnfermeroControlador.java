@@ -24,15 +24,15 @@ public class EnfermeroControlador {
     private final EnfermeroServicio service;
     @SneakyThrows
     @GetMapping(path="/get")
-    public @ResponseBody ResponseEntity getNurse (@RequestBody LoginRequest loginRequest) {
+    public @ResponseBody ResponseEntity obtenerEnfermero (@RequestBody String identificacion) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         ResponseEntity<?> finalResponse;
         MessageResponse message = new MessageResponse();
-        if (loginRequest.getEmail().isEmpty() || loginRequest.getPassword().isEmpty()) {
+        if (identificacion == null) {
             return new ResponseEntity<>(message.apply("Debe agregar los datos de ingreso"), HttpStatus.BAD_REQUEST);
         }
-        Enfermero enfermero = (Enfermero) service.get(loginRequest);
+        Enfermero enfermero = service.get(identificacion);
         finalResponse = enfermero == null ? new ResponseEntity<>(message.apply("El usuario no existe"), HttpStatus.NOT_FOUND) :
                 new ResponseEntity<>(enfermero, HttpStatus.OK);
         return finalResponse;
@@ -40,16 +40,14 @@ public class EnfermeroControlador {
 
     @SneakyThrows
     @PostMapping(path="/save")
-    public @ResponseBody ResponseEntity saveNurse (@RequestBody EnfermeroRequest enfermeroRequest) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
+    public @ResponseBody ResponseEntity guardarEnfermero(@RequestBody Enfermero enfermero) {
         ResponseEntity<?> finalResponse;
         MessageResponse message = new MessageResponse();
-        if (!enfermeroRequest.verifyContent()) {
+        if (enfermero.getId() == null) {
             return new ResponseEntity<>(message.apply("Debe agregar los datos de ingreso"), HttpStatus.BAD_REQUEST);
         }
 
-        finalResponse = service.save(enfermeroRequest) ? new ResponseEntity<>(message.apply("Usuario creado satisfactoriamente"), HttpStatus.CREATED) :
+        finalResponse = service.save(enfermero) ? new ResponseEntity<>(message.apply("Usuario creado satisfactoriamente"), HttpStatus.CREATED) :
                 new ResponseEntity<>(message.apply("Message:Usuario ya existente"), HttpStatus.LOCKED);
         return finalResponse;
     }
