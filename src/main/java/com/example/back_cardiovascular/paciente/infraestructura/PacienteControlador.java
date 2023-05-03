@@ -32,6 +32,7 @@ public class PacienteControlador {
     @SneakyThrows
     @PostMapping(path="/save")
     public @ResponseBody ResponseEntity<Paciente> savePatient (@RequestBody Paciente paciente) {
+        log.info("Guardar paciente");
         System.out.println(paciente);
         return ResponseEntity.ok(service.savePatient(paciente));
     }
