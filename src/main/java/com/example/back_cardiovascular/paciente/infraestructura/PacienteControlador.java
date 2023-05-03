@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(path="/pacientes") // This means URL's start with /demo (after Application path)
+@RequestMapping(path="/paciente") // This means URL's start with /demo (after Application path)
 public class PacienteControlador {
 
     @Autowired
@@ -32,6 +32,7 @@ public class PacienteControlador {
     @SneakyThrows
     @PostMapping(path="/save")
     public @ResponseBody ResponseEntity<Paciente> savePatient (@RequestBody Paciente paciente) {
+        System.out.println(paciente);
         return ResponseEntity.ok(service.savePatient(paciente));
     }
 

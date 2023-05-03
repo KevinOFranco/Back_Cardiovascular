@@ -7,6 +7,7 @@ import com.example.back_cardiovascular.authentication.dominio.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,12 +16,14 @@ public class EnfermeroServicio {
 
     private final IEnfermeroRepositorio enfermeroRepositorio;
 
-    public boolean save(EnfermeroRequest enfermeroRequest){
-        return enfermeroRepositorio.save(enfermeroRequest.transform()) != null;
+    public boolean save(Enfermero enfermero){
+        return enfermeroRepositorio.save(enfermero) != null;
     }
-    public Optional<Enfermero> get(Long id){
-        return enfermeroRepositorio.findById(id);
+    public Enfermero get(String id){
+        return enfermeroRepositorio.findByIdentificacion(id);
     }
+
+    public List<Enfermero> getAll(){return enfermeroRepositorio.findAll();}
     public Object get(LoginRequest loginRequest){
         return enfermeroRepositorio.findByEmail(loginRequest.getEmail());
     }

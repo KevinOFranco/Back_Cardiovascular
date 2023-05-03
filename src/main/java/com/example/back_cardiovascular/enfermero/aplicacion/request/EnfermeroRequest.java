@@ -15,12 +15,4 @@ public class EnfermeroRequest {
         }
         return true;
     }
-
-    public Enfermero transform(){
-        Enfermero enfermero = new Enfermero();
-        enfermero.setName(name);
-        enfermero.setEmail(email);
-        enfermero.setPassword(password);
-        return enfermero;
-    }
 }

@@ -24,7 +24,7 @@ public class CitaControlador {
 
     @SneakyThrows
     @PostMapping(path="/save")
-    public @ResponseBody ResponseEntity saveNurse (@RequestBody CitaRequest citaRequest) {
+    public @ResponseBody ResponseEntity saveCita (@RequestBody CitaRequest citaRequest) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         ResponseEntity<?> finalResponse;
