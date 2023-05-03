@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(path="/nurse") // This means URL's start with /demo (after Application path)
+@RequestMapping(path="/enfermero") // This means URL's start with /demo (after Application path)
 public class EnfermeroControlador {
 
     private final EnfermeroServicio service;
@@ -41,9 +41,10 @@ public class EnfermeroControlador {
     @SneakyThrows
     @PostMapping(path="/save")
     public @ResponseBody ResponseEntity guardarEnfermero(@RequestBody Enfermero enfermero) {
+        System.out.println(enfermero);
         ResponseEntity<?> finalResponse;
         MessageResponse message = new MessageResponse();
-        if (enfermero.getId() == null) {
+        if (enfermero.getIdentificacion() == null) {
             return new ResponseEntity<>(message.apply("Debe agregar los datos de ingreso"), HttpStatus.BAD_REQUEST);
         }
 
