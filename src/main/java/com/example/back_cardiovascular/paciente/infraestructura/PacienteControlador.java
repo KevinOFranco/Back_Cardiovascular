@@ -25,6 +25,8 @@ public class PacienteControlador {
     @GetMapping(path="/get")
     public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
         Paciente paciente = service.getPatient(identificacion);
+        paciente.setNombre("Manuel");
+
         return ResponseEntity.ok(paciente);
     }
 
@@ -33,7 +35,6 @@ public class PacienteControlador {
     public @ResponseBody ResponseEntity<Paciente> savePatient (@RequestBody Paciente paciente) {
         log.info("Guardar paciente");
         System.out.println(paciente);
-        paciente.setNombre("Manuel");
         return ResponseEntity.ok(service.savePatient(paciente));
     }
 
