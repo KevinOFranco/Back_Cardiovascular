@@ -26,6 +26,7 @@ public class PacienteControlador {
     public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
         Paciente paciente = service.getPatient(identificacion);
         System.out.println(paciente);
+        paciente.setNombre("Manuel");
         return ResponseEntity.ok(paciente);
     }
 
