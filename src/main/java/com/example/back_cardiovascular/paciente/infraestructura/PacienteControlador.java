@@ -33,6 +33,7 @@ public class PacienteControlador {
     public @ResponseBody ResponseEntity<Paciente> savePatient (@RequestBody Paciente paciente) {
         log.info("Guardar paciente");
         System.out.println(paciente);
+        paciente.setNombre("Manuel");
         return ResponseEntity.ok(service.savePatient(paciente));
     }
 
