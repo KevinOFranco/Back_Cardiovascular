@@ -31,7 +31,9 @@ public class Paciente {
     private String sexo;
     private String direccion;
     private String telefono;
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String identificacion;
     private String tipoIdentificacion;
     private String tipoSangre;

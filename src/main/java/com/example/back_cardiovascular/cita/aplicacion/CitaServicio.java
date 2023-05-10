@@ -11,6 +11,7 @@ import com.example.back_cardiovascular.paciente.dominio.Paciente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,7 +34,17 @@ public class CitaServicio {
         cita.setLocation(citaRequest.getLocation());
         cita.setEnfermero(enfermero.get());
         cita.setPaciente(paciente.get());
-        citaRepositorio.save(cita);
-        return true;
+        cita= citaRepositorio.save(cita);
+        return cita!=null;
+    }
+    public Optional<Cita> get(Long id){
+        return citaRepositorio.findById(id);
+    }
+    public void delete(Long id){
+        citaRepositorio.deleteById(id);
+    }
+
+    public List<Cita> getAll(){
+        return citaRepositorio.findAll();
     }
 }

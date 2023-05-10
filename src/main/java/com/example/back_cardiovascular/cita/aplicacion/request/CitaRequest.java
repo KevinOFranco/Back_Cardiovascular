@@ -9,8 +9,8 @@ import java.time.LocalTime;
 @Data
 public class CitaRequest {
 
-    Long enfermeroId;
-    Long pacienteId;
+    private Long enfermeroId;
+    private Long pacienteId;
     private LocalDate date;
     private LocalTime time;
     private LocalTime duration;
