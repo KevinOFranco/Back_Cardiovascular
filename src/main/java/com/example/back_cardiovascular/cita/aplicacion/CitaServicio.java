@@ -26,14 +26,11 @@ public class CitaServicio {
         Optional<Paciente> paciente = pacienteRepositorio.findById(citaRequest.getPacienteId());
         Cita cita = new Cita();
         cita.setDate(citaRequest.getDate());
-        cita.setTime(citaRequest.getTime());
-        cita.setDuration(citaRequest.getDuration());
         cita.setState(Estado.Scheduled);
-        cita.setNote(citaRequest.getNote());
-        cita.setType(citaRequest.getType());
+        cita.setIntervalo(citaRequest.getNote());
+
         cita.setLocation(citaRequest.getLocation());
-        cita.setEnfermero(enfermero.get());
-        cita.setPaciente(paciente.get());
+
         cita= citaRepositorio.save(cita);
         return cita!=null;
     }

@@ -43,6 +43,6 @@ public class Paciente {
     @OneToMany (mappedBy = "paciente")
     private List<HistoriaClinica> historiasClinicas;
     @JsonIgnore()
-    @OneToMany (mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente")
     private List<Cita> citas;
 }
