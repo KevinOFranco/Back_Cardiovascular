@@ -18,8 +18,7 @@ public class Cita {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private LocalDate date;
-    private LocalTime time;
-    private LocalTime duration;
+    private String intervaloHora;
     private Estado state;
     private String note;
     private String type;

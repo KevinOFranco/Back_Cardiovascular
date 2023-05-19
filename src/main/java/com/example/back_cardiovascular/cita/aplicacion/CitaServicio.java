@@ -1,6 +1,7 @@
 package com.example.back_cardiovascular.cita.aplicacion;
 
 import com.example.back_cardiovascular.cita.aplicacion.request.CitaRequest;
+import com.example.back_cardiovascular.cita.aplicacion.response.CitaDisponible;
 import com.example.back_cardiovascular.cita.dominio.Cita;
 import com.example.back_cardiovascular.cita.dominio.Estado;
 import com.example.back_cardiovascular.cita.dominio.ICitaRepositorio;
@@ -11,6 +12,7 @@ import com.example.back_cardiovascular.paciente.dominio.Paciente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,21 +23,20 @@ public class CitaServicio {
     private final IEnfermeroRepositorio enfermeroRepositorio;
     private final IPacienteRepositorio pacienteRepositorio;
 
-    public boolean save(CitaRequest citaRequest){
+    public boolean CrearHorarioCita(CitaRequest citaRequest){
         Optional<Enfermero> enfermero = enfermeroRepositorio.findById(citaRequest.getEnfermeroId());
-        Optional<Paciente> paciente = pacienteRepositorio.findById(citaRequest.getPacienteId());
         Cita cita = new Cita();
         cita.setDate(citaRequest.getDate());
-        cita.setTime(citaRequest.getTime());
-        cita.setDuration(citaRequest.getDuration());
         cita.setState(Estado.Scheduled);
-        cita.setNote(citaRequest.getNote());
         cita.setType(citaRequest.getType());
         cita.setLocation(citaRequest.getLocation());
         cita.setEnfermero(enfermero.get());
-        cita.setPaciente(paciente.get());
         cita= citaRepositorio.save(cita);
+
         return cita!=null;
+    }
+    public List<CitaDisponible> getAvailableSchedule(Long id, LocalDate date){
+        return citaRepositorio.findAvailableSchedule(id, date);
     }
     public Optional<Cita> get(Long id){
         return citaRepositorio.findById(id);
