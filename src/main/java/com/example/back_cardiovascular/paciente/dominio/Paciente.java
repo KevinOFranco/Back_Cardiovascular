@@ -4,14 +4,12 @@ import com.example.back_cardiovascular.cita.dominio.Cita;
 import com.example.back_cardiovascular.historia_clinica.HistoriaClinica;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -38,7 +36,13 @@ public class Paciente {
     private String tipoIdentificacion;
     private String tipoSangre;
     private String estadoCivil;
-    private String EPSRegimen;
+    private String eps;
+    private String etnia;
+    private String genero;
+    private String zonaResidencia;
+    private String gruposPoblacionales;
+    private String ocupacion;
+
     @JsonIgnore()
     @OneToMany (mappedBy = "paciente")
     private List<HistoriaClinica> historiasClinicas;
