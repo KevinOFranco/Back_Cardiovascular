@@ -3,9 +3,11 @@ name: SonarCloud Analysis
 on:
   push:
     branches:
+      - master
       - railway
   pull_request:
     branches:
+      - master
       - railway
 
 jobs:
@@ -16,10 +18,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Build with Gradle
         run: ./gradlew build -x test
