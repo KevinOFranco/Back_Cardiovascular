@@ -5,7 +5,9 @@ on:
       - master
       - railway
   pull_request:
-    types: [opened, synchronize, reopened]
+      branches: 
+      - master
+      - railway
 jobs:
   build:
     name: Build and analyze
