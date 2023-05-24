@@ -25,7 +25,6 @@ public class PacienteControlador {
     @GetMapping(path="/get")
     public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
         Paciente paciente = service.getPatient(identificacion);
-        System.out.println(paciente);
         return ResponseEntity.ok(paciente);
     }
 
