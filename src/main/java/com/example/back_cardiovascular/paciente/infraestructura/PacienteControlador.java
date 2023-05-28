@@ -6,10 +6,14 @@ import com.example.back_cardiovascular.paciente.aplicacion.PacienteServicio;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -21,12 +25,16 @@ public class PacienteControlador {
 
     @Autowired
     private PacienteServicio service;
+    private static final Logger logger = LoggerFactory.getLogger(PacienteControlador.class);
+
     @SneakyThrows
     @GetMapping(path="/get")
-    public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam String identificacion) {
-        Paciente paciente = service.getPatient(identificacion);
-        System.out.println(paciente);
-        return ResponseEntity.ok(paciente);
+    public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam Long identificacion) {
+
+        Optional<Paciente> paciente = service.findById(identificacion);
+        logger.info("llego la peticion del cliente"+ paciente.toString());
+
+        return ResponseEntity.ok(paciente.get());
     }
 
     @SneakyThrows

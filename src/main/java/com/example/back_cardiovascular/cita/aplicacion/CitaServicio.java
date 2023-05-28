@@ -1,6 +1,7 @@
 package com.example.back_cardiovascular.cita.aplicacion;
 
 import com.example.back_cardiovascular.cita.aplicacion.request.CitaRequest;
+import com.example.back_cardiovascular.cita.aplicacion.response.CitaAgendada;
 import com.example.back_cardiovascular.cita.aplicacion.response.CitaDisponible;
 import com.example.back_cardiovascular.cita.dominio.Cita;
 import com.example.back_cardiovascular.cita.dominio.Estado;
@@ -36,7 +37,13 @@ public class CitaServicio {
         return cita!=null;
     }
     public List<CitaDisponible> getAvailableSchedule(Long id, LocalDate date){
-        return citaRepositorio.findAvailableSchedule(id, date);
+        return citaRepositorio.findAvailableSchedule(id, date, Estado.Confirmed);
+    }
+    public List<CitaAgendada> getAppointments(Enfermero enfermero, LocalDate date){
+        return citaRepositorio.findAppointments(enfermero, date, Estado.Scheduled);
+    }
+    public Cita buscarPorIntervaloHoraEnfermeroYFecha (String hora, Enfermero enfermero, LocalDate date){
+        return citaRepositorio.buscarPorIntervaloHoraEnfermeroYFecha(hora, enfermero, date);
     }
     public Optional<Cita> get(Long id){
         return citaRepositorio.findById(id);
@@ -47,5 +54,9 @@ public class CitaServicio {
 
     public List<Cita> getAll(){
         return citaRepositorio.findAll();
+    }
+
+    public void agendarCita(Cita cita) {
+        citaRepositorio.save(cita);
     }
 }
