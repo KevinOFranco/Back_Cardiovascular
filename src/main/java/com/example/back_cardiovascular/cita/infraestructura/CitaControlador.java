@@ -4,6 +4,7 @@ import com.example.back_cardiovascular.cita.aplicacion.CitaServicio;
 import com.example.back_cardiovascular.cita.aplicacion.request.CitaRequest;
 import com.example.back_cardiovascular.cita.aplicacion.response.CitaAgendada;
 import com.example.back_cardiovascular.cita.aplicacion.response.CitaDisponible;
+import com.example.back_cardiovascular.cita.aplicacion.response.CitaResponse;
 import com.example.back_cardiovascular.cita.dominio.Cita;
 import com.example.back_cardiovascular.cita.dominio.Estado;
 import com.example.back_cardiovascular.enfermero.aplicacion.EnfermeroServicio;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,14 +62,18 @@ public class CitaControlador {
         List<CitaDisponible> available = citaServicio.getAvailableSchedule(identificacion, date);
         return ResponseEntity.ok(available);
     }
-   /* @SneakyThrows
+    @SneakyThrows
     @GetMapping(path="/confirmed")
-    public @ResponseBody ResponseEntity<List<CitaAgendada>> getAppointments (@RequestParam("id") Long identificacion,
+    public @ResponseBody ResponseEntity<List<CitaResponse>> getAppointments (@RequestParam("id") Long identificacion,
                                                                            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
         Optional<Enfermero> enfermero = enfermeroServicio.findById(identificacion);
-        List<CitaAgendada> agenda = citaServicio.getAppointments(enfermero.get(), date);
-        return ResponseEntity.ok(agenda);
-    }*/
+        List<CitaAgendada> agendas = citaServicio.getAppointments(enfermero.get(), date);
+        List<CitaResponse> agendasResponse = new ArrayList<>();
+        for (CitaAgendada agenda: agendas) {
+            agendasResponse.add(new CitaResponse(agenda.getHora(),agenda.getPaciente().getNombre()));
+        }
+        return ResponseEntity.ok(agendasResponse);
+    }
 
 
     @SneakyThrows

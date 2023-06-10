@@ -32,8 +32,6 @@ public class PacienteControlador {
     public @ResponseBody ResponseEntity<Paciente> getPatient (@RequestParam Long identificacion) {
 
         Optional<Paciente> paciente = service.findById(identificacion);
-        logger.info("llego la peticion del cliente" + paciente.toString());
-
         return ResponseEntity.ok(paciente.get());
     }
 
