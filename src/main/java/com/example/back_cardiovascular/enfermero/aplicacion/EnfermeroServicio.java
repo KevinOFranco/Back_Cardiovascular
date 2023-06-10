@@ -1,6 +1,5 @@
 package com.example.back_cardiovascular.enfermero.aplicacion;
 
-import com.example.back_cardiovascular.enfermero.aplicacion.request.EnfermeroRequest;
 import com.example.back_cardiovascular.enfermero.dominio.IEnfermeroRepositorio;
 import com.example.back_cardiovascular.enfermero.dominio.Enfermero;
 import com.example.back_cardiovascular.authentication.dominio.LoginRequest;
@@ -21,6 +20,9 @@ public class EnfermeroServicio {
     }
     public Enfermero get(String id){
         return enfermeroRepositorio.findByIdentificacion(id);
+    }
+    public Optional<Enfermero> findById(Long id){
+        return enfermeroRepositorio.findById(id);
     }
 
     public List<Enfermero> getAll(){return enfermeroRepositorio.findAll();}

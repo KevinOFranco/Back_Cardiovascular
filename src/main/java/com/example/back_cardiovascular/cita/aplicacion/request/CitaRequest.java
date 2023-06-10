@@ -10,16 +10,14 @@ import java.time.LocalTime;
 public class CitaRequest {
 
     private Long enfermeroId;
-    private Long pacienteId;
     private LocalDate date;
-    private LocalTime time;
-    private LocalTime duration;
-    private String note;
+    private String hora;
+
     private String type;
     private String location;
 
     public boolean verifyContent (){
-        if (enfermeroId.equals(null) || pacienteId.equals(null) || date.isEqual(null) || time.equals(null) || duration.equals(null) ) {
+        if (enfermeroId.equals(null) ||  date.isEqual(null)  ) {
             return false;
         }
         return true;
