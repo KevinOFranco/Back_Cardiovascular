@@ -2,6 +2,7 @@ package com.example.back_cardiovascular.security;
 
 import com.example.back_cardiovascular.enfermero.dominio.Enfermero;
 import com.example.back_cardiovascular.facturador.dominio.Facturador;
+import com.example.back_cardiovascular.usuario.dominio.Usuario;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import java.util.Collections;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private final Facturador facturador;
+    private final Usuario facturador;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList(); //Para roles
@@ -49,6 +50,8 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public String getNombre(){return facturador.getNombre();}
+
+    public String getRol(){return facturador.getRol();}
 
 
 }

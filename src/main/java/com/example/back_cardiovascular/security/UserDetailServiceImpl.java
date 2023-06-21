@@ -4,6 +4,8 @@ import com.example.back_cardiovascular.enfermero.dominio.IEnfermeroRepositorio;
 import com.example.back_cardiovascular.enfermero.dominio.Enfermero;
 import com.example.back_cardiovascular.facturador.dominio.Facturador;
 import com.example.back_cardiovascular.facturador.dominio.IFacturadorRepositorio;
+import com.example.back_cardiovascular.usuario.dominio.IUsuarioRepositorio;
+import com.example.back_cardiovascular.usuario.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,10 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
-    private IFacturadorRepositorio facturadorRepositorio;
+    private IUsuarioRepositorio facturadorRepositorio;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Facturador facturador = facturadorRepositorio.findByEmail(email)
+        Usuario facturador = facturadorRepositorio.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("El usuario no existe"));
         return new UserDetailsImpl(facturador);
     }
